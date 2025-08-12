@@ -4,7 +4,7 @@ import PatternCard from "../components/PatternCard.astro";
 import Hero from "../components/Hero.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import FeaturesGrid from "../components/FeaturesGrid.astro";
-import PatternsHeader from "../components/PatternsHeader.astro";
+import PatternsList from "../components/PatternsList.astro";
 ---
 
 <Layout>
@@ -16,69 +16,14 @@ import PatternsHeader from "../components/PatternsHeader.astro";
       <FeaturesGrid />
     </section>
 
-    <section class="patterns">
-      <PatternsHeader />
-      <div class="patterns-grid">
-        <PatternCard
-          icon="📄"
-          title="Пагинация"
-          description="Навигация по страницам контента с удобным переключением между ними."
-          imageSrc="https://via.placeholder.com/400x200/667eea/ffffff?text=Pagination+Demo"
-          imageAlt="Демонстрация компонента пагинации"
-          href="/patterns/pagination"
-        />
-
-        <PatternCard
-          icon="🍞"
-          title="Хлебные крошки"
-          description="Навигационная цепочка, показывающая путь к текущей странице."
-          imageSrc="https://via.placeholder.com/400x200/764ba2/ffffff?text=Breadcrumbs+Demo"
-          imageAlt="Демонстрация компонента хлебных крошек"
-          href="/patterns/breadcrumbs"
-        />
-
-        <PatternCard
-          icon="📄"
-          title="Центрирование страницы"
-          description="Современный вариант центрирования контента на странице."
-          imageSrc="https://via.placeholder.com/400x200/667eea/ffffff?text=Pagination+Demo"
-          imageAlt="Демонстрация компонента пагинации"
-          href="/patterns/centering-page"
-        />
-      </div>
-      </div>
-    </section>
+    <PatternCard
+      icon="📄"
+      title="Центрирование страницы"
+      description="Современный вариант центрирования контента на странице."
+      imageSrc="/public/centering-page/margin-inline-final-size.png"
+      imageAlt="Демонстрация центрирования контента на странице"
+      href="/patterns/centering-page"
+    />
+    </PatternsList>
   </main>
 </Layout>
-
-<style>
-  .container {
-    margin-inline: max(20px, (100% - 1200px) / 2);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif;
-    line-height: 1.6;
-    color: #1a1a1a;
-  }
-
-
-  /* Patterns Section */
-  .patterns {
-    margin-bottom: 80px;
-  }
-
-  .patterns-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
-  }
-
-  @media (max-width: 768px) {
-    .patterns-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .pattern-card {
-      padding: 24px;
-    }
-  }
-</style>

@@ -8,7 +8,9 @@ const { description } = Astro.props;
 
 <div class="pattern-description">
   <h2 class="pattern-description__title">Описание паттерна</h2>
-  <p class="pattern-description__text">{description}</p>
+  <p class="pattern-description__text">
+    <slot />
+  </p>
 </div>
 
 <style>

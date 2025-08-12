@@ -1,0 +1,33 @@
+---
+import PatternsHeader from './PatternsHeader.astro';
+---
+
+<section class="patterns">
+  <PatternsHeader />
+
+  <div class="patterns-grid">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .patterns {
+    margin-bottom: 80px;
+  }
+
+  .patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .patterns-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pattern-card {
+      padding: 24px;
+    }
+  }
+</style>
