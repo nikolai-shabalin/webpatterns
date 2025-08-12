@@ -1,11 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content="Коллекция веб-паттернов - готовые решения для веб-разработки" />
+		<meta name="keywords" content="веб-паттерны, UI, UX, компоненты, пагинация, хлебные крошки" />
+		<title>Веб-паттерны - Коллекция готовых решений</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<slot />
@@ -13,10 +18,282 @@
 </html>
 
 <style>
+	html {
+		scroll-behavior: smooth;
+	}
+
 	html,
 	body {
 		margin: 0;
+		padding: 0;
 		width: 100%;
-		height: 100%;
+		min-height: 100vh;
+		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+		line-height: 1.6;
+		color: #1a1a1a;
+		background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	/* Улучшенная типографика */
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0;
+		font-weight: 600;
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+	}
+
+	p {
+		margin: 0 0 1rem 0;
+	}
+
+	/* Улучшенные ссылки */
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	/* Улучшенные списки */
+	ul, ol {
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	/* Улучшенные кнопки */
+	button {
+		border: none;
+		background: none;
+		cursor: pointer;
+		font-family: inherit;
+		padding: 0;
+	}
+
+	/* Улучшенные изображения */
+	img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	/* Улучшенные формы */
+	input, textarea, select {
+		font-family: inherit;
+		font-size: inherit;
+		border: none;
+		outline: none;
+	}
+
+	/* Улучшенная доступность */
+	:focus {
+		outline: 2px solid #667eea;
+		outline-offset: 2px;
+	}
+
+	/* Улучшенная прокрутка */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #c1c1c1;
+		border-radius: 4px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: #a8a8a8;
+	}
+
+	/* Улучшенная выделение текста */
+	::selection {
+		background: rgba(102, 126, 234, 0.2);
+		color: inherit;
+	}
+
+	/* Улучшенная анимация для всех элементов */
+	* {
+		transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	/* Улучшенные тени */
+	.shadow-sm {
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	}
+
+	.shadow {
+		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+	}
+
+	.shadow-md {
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	}
+
+	.shadow-lg {
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	}
+
+	.shadow-xl {
+		box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	}
+
+	/* Улучшенные градиенты */
+	.gradient-primary {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	}
+
+	.gradient-secondary {
+		background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+	}
+
+	.gradient-success {
+		background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+	}
+
+	/* Улучшенные цвета */
+	.text-primary {
+		color: #667eea;
+	}
+
+	.text-secondary {
+		color: #764ba2;
+	}
+
+	.text-muted {
+		color: #666;
+	}
+
+	.text-light {
+		color: #999;
+	}
+
+	.bg-primary {
+		background-color: #667eea;
+	}
+
+	.bg-secondary {
+		background-color: #764ba2;
+	}
+
+	.bg-light {
+		background-color: #f8f9fa;
+	}
+
+	.bg-white {
+		background-color: #ffffff;
+	}
+
+	/* Улучшенные утилиты */
+	.rounded {
+		border-radius: 8px;
+	}
+
+	.rounded-lg {
+		border-radius: 12px;
+	}
+
+	.rounded-xl {
+		border-radius: 16px;
+	}
+
+	.rounded-2xl {
+		border-radius: 20px;
+	}
+
+	.rounded-full {
+		border-radius: 9999px;
+	}
+
+	/* Улучшенные отступы */
+	.p-4 {
+		padding: 1rem;
+	}
+
+	.p-6 {
+		padding: 1.5rem;
+	}
+
+	.p-8 {
+		padding: 2rem;
+	}
+
+	.m-4 {
+		margin: 1rem;
+	}
+
+	.m-6 {
+		margin: 1.5rem;
+	}
+
+	.m-8 {
+		margin: 2rem;
+	}
+
+	/* Улучшенные флекс-утилиты */
+	.flex {
+		display: flex;
+	}
+
+	.flex-col {
+		flex-direction: column;
+	}
+
+	.items-center {
+		align-items: center;
+	}
+
+	.justify-center {
+		justify-content: center;
+	}
+
+	.justify-between {
+		justify-content: space-between;
+	}
+
+	.gap-2 {
+		gap: 0.5rem;
+	}
+
+	.gap-4 {
+		gap: 1rem;
+	}
+
+	.gap-6 {
+		gap: 1.5rem;
+	}
+
+	/* Улучшенные сетки */
+	.grid {
+		display: grid;
+	}
+
+	.grid-cols-1 {
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+	}
+
+	.grid-cols-2 {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.grid-cols-3 {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	@media (max-width: 768px) {
+		.grid-cols-2,
+		.grid-cols-3 {
+			grid-template-columns: repeat(1, minmax(0, 1fr));
+		}
 	}
 </style>

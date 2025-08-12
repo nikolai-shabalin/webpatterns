@@ -1,0 +1,297 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Pagination from '../../components/Pagination.astro';
+
+// Получаем текущую страницу из URL параметров
+const url = new URL(Astro.request.url);
+const currentPage = parseInt(url.searchParams.get('page') || '1');
+---
+
+<Layout>
+	<main class="container">
+
+		<header class="pattern-header">
+			<h1>Пагинация</h1>
+			<p class="pattern-description">
+				Навигационный паттерн для разделения большого количества контента на отдельные страницы
+			</p>
+		</header>
+
+		<section class="pattern-content">
+			<div class="content-grid">
+				<div class="content-main">
+					<h2>Описание паттерна</h2>
+					<p>
+						Пагинация — это способ организации контента, при котором большое количество элементов 
+						разбивается на несколько страниц. Это улучшает производительность, упрощает навигацию 
+						и делает интерфейс более удобным для пользователей.
+					</p>
+
+					<h3>Когда использовать</h3>
+					<ul>
+						<li>Списки товаров в интернет-магазине</li>
+						<li>Результаты поиска</li>
+						<li>Блоги и новостные сайты</li>
+						<li>Таблицы с большим количеством данных</li>
+						<li>Галереи изображений</li>
+					</ul>
+
+					<h3>Принципы хорошей пагинации</h3>
+					<ul>
+						<li><strong>Понятность:</strong> Пользователь должен понимать, где он находится</li>
+						<li><strong>Доступность:</strong> Легкий переход к первой, последней и соседним страницам</li>
+						<li><strong>Информативность:</strong> Показ общего количества страниц и элементов</li>
+						<li><strong>Производительность:</strong> Загрузка только необходимого контента</li>
+					</ul>
+
+					<h2>Демонстрация</h2>
+					<div class="demo-section">
+						<h3>Страница {currentPage} из 10</h3>
+						<div class="demo-content">
+							<p>Здесь мог бы быть контент страницы {currentPage}...</p>
+							<div class="mock-content">
+								{Array.from({ length: 5 }, (_, i) => (
+									<div class="mock-item">
+										<h4>Элемент {(currentPage - 1) * 5 + i + 1}</h4>
+										<p>Описание элемента {(currentPage - 1) * 5 + i + 1}</p>
+									</div>
+								))}
+							</div>
+						</div>
+						
+						<div class="pagination-demo">
+							<Pagination currentPage={currentPage} totalPages={10} baseUrl="/patterns/pagination" />
+						</div>
+					</div>
+				</div>
+
+				<aside class="content-sidebar">
+					<div class="sidebar-card">
+						<h3>Варианты пагинации</h3>
+						<div class="pagination-variants">
+							<div class="variant">
+								<h4>Простая</h4>
+								<Pagination currentPage={1} totalPages={5} />
+							</div>
+							<div class="variant">
+								<h4>С многоточием</h4>
+								<Pagination currentPage={5} totalPages={20} />
+							</div>
+							<div class="variant">
+								<h4>В середине</h4>
+								<Pagination currentPage={8} totalPages={15} />
+							</div>
+						</div>
+					</div>
+
+					<div class="sidebar-card">
+						<h3>Код компонента</h3>
+						<pre class="code-block"><code>// Использование
+&lt;Pagination 
+  currentPage={3} 
+  totalPages={10} 
+  baseUrl="/products" 
+/&gt;
+
+// Параметры
+- currentPage: номер текущей страницы
+- totalPages: общее количество страниц
+- baseUrl: базовый URL для ссылок</code></pre>
+					</div>
+				</aside>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		line-height: 1.6;
+		color: #333;
+	}
+
+	.pattern-header {
+		text-align: center;
+		padding: 40px 0;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		margin: -20px -20px 40px -20px;
+		border-radius: 0 0 20px 20px;
+	}
+
+	.pattern-header h1 {
+		font-size: 2.5rem;
+		margin: 0 0 15px 0;
+		font-weight: 700;
+	}
+
+	.pattern-description {
+		font-size: 1.1rem;
+		opacity: 0.9;
+		margin: 0;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.pattern-content {
+		margin-bottom: 60px;
+	}
+
+	.content-grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: 40px;
+	}
+
+	.content-main h2 {
+		font-size: 1.8rem;
+		margin: 30px 0 20px 0;
+		color: #2c3e50;
+	}
+
+	.content-main h3 {
+		font-size: 1.3rem;
+		margin: 25px 0 15px 0;
+		color: #34495e;
+	}
+
+	.content-main p {
+		margin-bottom: 15px;
+		color: #555;
+	}
+
+	.content-main ul {
+		margin-bottom: 20px;
+		padding-left: 20px;
+	}
+
+	.content-main li {
+		margin-bottom: 8px;
+		color: #555;
+	}
+
+	.demo-section {
+		background: #f8f9fa;
+		padding: 30px;
+		border-radius: 12px;
+		margin: 30px 0;
+	}
+
+	.demo-section h3 {
+		margin-top: 0;
+		color: #2c3e50;
+	}
+
+	.demo-content {
+		margin-bottom: 30px;
+	}
+
+	.mock-content {
+		display: grid;
+		gap: 15px;
+		margin: 20px 0;
+	}
+
+	.mock-item {
+		background: white;
+		padding: 20px;
+		border-radius: 8px;
+		border: 1px solid #e1e5e9;
+	}
+
+	.mock-item h4 {
+		margin: 0 0 10px 0;
+		color: #2c3e50;
+	}
+
+	.mock-item p {
+		margin: 0;
+		color: #666;
+	}
+
+	.pagination-demo {
+		display: flex;
+		justify-content: center;
+		padding: 20px 0;
+	}
+
+	.content-sidebar {
+		position: sticky;
+		top: 20px;
+		height: fit-content;
+	}
+
+	.sidebar-card {
+		background: white;
+		border-radius: 12px;
+		padding: 25px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		margin-bottom: 25px;
+	}
+
+	.sidebar-card h3 {
+		margin: 0 0 20px 0;
+		color: #2c3e50;
+		font-size: 1.2rem;
+	}
+
+	.pagination-variants {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.variant {
+		padding: 15px;
+		background: #f8f9fa;
+		border-radius: 8px;
+	}
+
+	.variant h4 {
+		margin: 0 0 10px 0;
+		font-size: 0.9rem;
+		color: #6c757d;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.code-block {
+		background: #2d3748;
+		color: #e2e8f0;
+		padding: 20px;
+		border-radius: 8px;
+		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		overflow-x: auto;
+	}
+
+	.code-block code {
+		background: none;
+		padding: 0;
+	}
+
+	/* Адаптивность */
+	@media (max-width: 768px) {
+		.content-grid {
+			grid-template-columns: 1fr;
+			gap: 30px;
+		}
+
+		.content-sidebar {
+			position: static;
+		}
+
+		.pattern-header h1 {
+			font-size: 2rem;
+		}
+
+		.demo-section {
+			padding: 20px;
+		}
+	}
+</style>

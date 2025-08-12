@@ -1,0 +1,248 @@
+---
+export interface Props {
+	currentPage: number;
+	totalPages: number;
+	baseUrl?: string;
+}
+
+const { currentPage, totalPages, baseUrl = '#' } = Astro.props;
+
+// Генерируем массив страниц для отображения
+const getPageNumbers = () => {
+	const pages = [];
+	const maxVisible = 5;
+	
+	if (totalPages <= maxVisible) {
+		// Показываем все страницы
+		for (let i = 1; i <= totalPages; i++) {
+			pages.push(i);
+		}
+	} else {
+		// Показываем ограниченное количество страниц
+		if (currentPage <= 3) {
+			// В начале списка
+			for (let i = 1; i <= 4; i++) {
+				pages.push(i);
+			}
+			pages.push('...');
+			pages.push(totalPages);
+		} else if (currentPage >= totalPages - 2) {
+			// В конце списка
+			pages.push(1);
+			pages.push('...');
+			for (let i = totalPages - 3; i <= totalPages; i++) {
+				pages.push(i);
+			}
+		} else {
+			// В середине списка
+			pages.push(1);
+			pages.push('...');
+			for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+				pages.push(i);
+			}
+			pages.push('...');
+			pages.push(totalPages);
+		}
+	}
+	
+	return pages;
+};
+
+const pageNumbers = getPageNumbers();
+---
+
+<nav class="pagination" role="navigation" aria-label="Навигация по страницам">
+	<ul class="pagination-list">
+		<!-- Кнопка "Предыдущая" -->
+		<li class="pagination-item">
+			<a 
+				href={currentPage > 1 ? `${baseUrl}?page=${currentPage - 1}` : '#'}
+				class={`pagination-link pagination-prev ${currentPage <= 1 ? 'disabled' : ''}`}
+				aria-label="Предыдущая страница"
+			>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="15,18 9,12 15,6"></polyline>
+				</svg>
+			</a>
+		</li>
+
+		<!-- Номера страниц -->
+		{pageNumbers.map((page) => (
+			<li class="pagination-item">
+				{page === '...' ? (
+					<span class="pagination-ellipsis">...</span>
+				) : (
+					<a 
+						href={`${baseUrl}?page=${page}`}
+						class={`pagination-link ${page === currentPage ? 'active' : ''}`}
+						aria-label={`Страница ${page}`}
+						aria-current={page === currentPage ? 'page' : undefined}
+					>
+						{page}
+					</a>
+				)}
+			</li>
+		))}
+
+		<!-- Кнопка "Следующая" -->
+		<li class="pagination-item">
+			<a 
+				href={currentPage < totalPages ? `${baseUrl}?page=${currentPage + 1}` : '#'}
+				class={`pagination-link pagination-next ${currentPage >= totalPages ? 'disabled' : ''}`}
+				aria-label="Следующая страница"
+			>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="9,18 15,12 9,6"></polyline>
+				</svg>
+			</a>
+		</li>
+	</ul>
+
+	<div class="pagination-info">
+		Страница {currentPage} из {totalPages}
+	</div>
+</nav>
+
+<style>
+	.pagination {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 15px;
+	}
+
+	.pagination-list {
+		display: flex;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		gap: 5px;
+		align-items: center;
+	}
+
+	.pagination-item {
+		margin: 0;
+	}
+
+	.pagination-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 40px;
+		height: 40px;
+		padding: 0 12px;
+		border: 2px solid #e1e5e9;
+		border-radius: 8px;
+		background: white;
+		color: #4a5568;
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.2s ease;
+		cursor: pointer;
+	}
+
+	.pagination-link:hover:not(.disabled) {
+		border-color: #667eea;
+		color: #667eea;
+		transform: translateY(-1px);
+		box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+	}
+
+	.pagination-link.active {
+		background: #667eea;
+		border-color: #667eea;
+		color: white;
+		font-weight: 600;
+	}
+
+	.pagination-link.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+
+	.pagination-prev,
+	.pagination-next {
+		background: #f8f9fa;
+	}
+
+	.pagination-ellipsis {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 40px;
+		height: 40px;
+		padding: 0 12px;
+		color: #6c757d;
+		font-weight: 500;
+	}
+
+	.pagination-info {
+		font-size: 0.9rem;
+		color: #6c757d;
+		font-weight: 500;
+	}
+
+	/* Анимации */
+	.pagination-link {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.pagination-link::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+		transition: left 0.5s;
+	}
+
+	.pagination-link:hover::before {
+		left: 100%;
+	}
+
+	/* Адаптивность */
+	@media (max-width: 480px) {
+		.pagination-list {
+			gap: 3px;
+		}
+
+		.pagination-link {
+			min-width: 35px;
+			height: 35px;
+			padding: 0 8px;
+			font-size: 0.9rem;
+		}
+
+		.pagination-ellipsis {
+			min-width: 35px;
+			height: 35px;
+			padding: 0 8px;
+		}
+	}
+</style>
+
+<script>
+	// Добавляем интерактивность для демонстрации
+	document.addEventListener('DOMContentLoaded', () => {
+		const paginationLinks = document.querySelectorAll('.pagination-link:not(.disabled)');
+		
+		paginationLinks.forEach(link => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				
+				// Добавляем эффект нажатия
+				link.style.transform = 'scale(0.95)';
+				setTimeout(() => {
+					link.style.transform = '';
+				}, 150);
+				
+				// В реальном приложении здесь был бы переход на страницу
+				console.log('Переход на:', link.getAttribute('href'));
+			});
+		});
+	});
+</script>

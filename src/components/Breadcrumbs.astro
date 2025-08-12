@@ -1,0 +1,281 @@
+---
+export interface Props {
+	items: Array<{
+		name: string;
+		url: string;
+		icon?: string;
+	}>;
+	separator?: string;
+	showHomeIcon?: boolean;
+	variant?: 'default' | 'minimal' | 'with-icons';
+}
+
+const { 
+	items, 
+	separator = '/', 
+	showHomeIcon = true,
+	variant = 'default'
+} = Astro.props;
+
+// Определяем, является ли элемент домашней страницей
+const isHomePage = (url: string) => url === '/' || url === '/home';
+
+// Получаем иконку для элемента
+const getIcon = (item: { name: string; url: string; icon?: string }) => {
+	if (item.icon) return item.icon;
+	if (isHomePage(item.url) && showHomeIcon) return '🏠';
+	return '';
+};
+---
+
+<nav class={`breadcrumbs breadcrumbs-${variant}`} aria-label="Хлебные крошки">
+	<ol class="breadcrumbs-list">
+		{items.map((item, index) => {
+			const isLast = index === items.length - 1;
+			const icon = getIcon(item);
+			
+			return (
+				<li class="breadcrumbs-item">
+					{isLast ? (
+						<span 
+							class="breadcrumbs-link breadcrumbs-current" 
+							aria-current="page"
+						>
+							{icon && <span class="breadcrumbs-icon">{icon}</span>}
+							<span class="breadcrumbs-text">{item.name}</span>
+						</span>
+					) : (
+						<a href={item.url} class="breadcrumbs-link">
+							{icon && <span class="breadcrumbs-icon">{icon}</span>}
+							<span class="breadcrumbs-text">{item.name}</span>
+						</a>
+					)}
+					
+					{!isLast && (
+						<span class="breadcrumbs-separator" aria-hidden="true">
+							{separator}
+						</span>
+					)}
+				</li>
+			);
+		})}
+	</ol>
+</nav>
+
+<style>
+	.breadcrumbs {
+		display: flex;
+		align-items: center;
+		font-family: inherit;
+	}
+
+	.breadcrumbs-list {
+		display: flex;
+		align-items: center;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		flex-wrap: wrap;
+		gap: 4px;
+	}
+
+	.breadcrumbs-item {
+		display: flex;
+		align-items: center;
+		margin: 0;
+	}
+
+	.breadcrumbs-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 8px 12px;
+		color: #667eea;
+		text-decoration: none;
+		border-radius: 8px;
+		font-weight: 500;
+		font-size: 0.95rem;
+		transition: all 0.2s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.breadcrumbs-link:hover {
+		background: rgba(102, 126, 234, 0.1);
+		color: #764ba2;
+		transform: translateY(-1px);
+	}
+
+	.breadcrumbs-link::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+		transition: left 0.3s ease;
+	}
+
+	.breadcrumbs-link:hover::before {
+		left: 100%;
+	}
+
+	.breadcrumbs-current {
+		color: #1a1a1a;
+		font-weight: 600;
+		cursor: default;
+		background: rgba(102, 126, 234, 0.05);
+		border: 1px solid rgba(102, 126, 234, 0.1);
+	}
+
+	.breadcrumbs-current:hover {
+		background: rgba(102, 126, 234, 0.05);
+		color: #1a1a1a;
+		transform: none;
+	}
+
+	.breadcrumbs-current::before {
+		display: none;
+	}
+
+	.breadcrumbs-icon {
+		font-size: 1rem;
+		line-height: 1;
+	}
+
+	.breadcrumbs-text {
+		line-height: 1.2;
+	}
+
+	.breadcrumbs-separator {
+		color: #cbd5e0;
+		font-weight: 400;
+		margin: 0 4px;
+		font-size: 0.9rem;
+		user-select: none;
+	}
+
+	/* Варианты стилизации */
+	.breadcrumbs-minimal .breadcrumbs-link {
+		padding: 4px 8px;
+		font-size: 0.9rem;
+		border-radius: 4px;
+	}
+
+	.breadcrumbs-minimal .breadcrumbs-separator {
+		margin: 0 2px;
+		font-size: 0.8rem;
+	}
+
+	.breadcrumbs-with-icons .breadcrumbs-link {
+		padding: 10px 14px;
+		font-size: 1rem;
+		border-radius: 10px;
+		background: rgba(102, 126, 234, 0.05);
+		border: 1px solid rgba(102, 126, 234, 0.1);
+	}
+
+	.breadcrumbs-with-icons .breadcrumbs-link:hover {
+		background: rgba(102, 126, 234, 0.1);
+		border-color: rgba(102, 126, 234, 0.2);
+	}
+
+	.breadcrumbs-with-icons .breadcrumbs-current {
+		background: rgba(102, 126, 234, 0.15);
+		border-color: rgba(102, 126, 234, 0.3);
+	}
+
+	/* Адаптивность */
+	@media (max-width: 768px) {
+		.breadcrumbs-list {
+			gap: 2px;
+		}
+
+		.breadcrumbs-link {
+			padding: 6px 8px;
+			font-size: 0.9rem;
+		}
+
+		.breadcrumbs-icon {
+			font-size: 0.9rem;
+		}
+
+		.breadcrumbs-separator {
+			margin: 0 2px;
+			font-size: 0.8rem;
+		}
+
+		/* На мобильных скрываем длинные названия */
+		.breadcrumbs-text {
+			max-width: 80px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.breadcrumbs-link {
+			padding: 4px 6px;
+			font-size: 0.85rem;
+		}
+
+		.breadcrumbs-text {
+			max-width: 60px;
+		}
+
+		.breadcrumbs-icon {
+			font-size: 0.85rem;
+		}
+	}
+
+	/* Анимации для лучшего UX */
+	.breadcrumbs-link {
+		position: relative;
+	}
+
+	.breadcrumbs-link:active {
+		transform: scale(0.98);
+	}
+
+	/* Улучшенная доступность */
+	.breadcrumbs-link:focus {
+		outline: 2px solid #667eea;
+		outline-offset: 2px;
+	}
+
+	/* Темная тема (если понадобится) */
+	@media (prefers-color-scheme: dark) {
+		.breadcrumbs-current {
+			color: #ffffff;
+			background: rgba(102, 126, 234, 0.2);
+		}
+
+		.breadcrumbs-separator {
+			color: #718096;
+		}
+	}
+</style>
+
+<script>
+	// Добавляем интерактивность для демонстрации
+	document.addEventListener('DOMContentLoaded', () => {
+		const breadcrumbLinks = document.querySelectorAll('.breadcrumbs-link:not(.breadcrumbs-current)');
+		
+		breadcrumbLinks.forEach(link => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				
+				// Добавляем эффект нажатия
+				link.style.transform = 'scale(0.95)';
+				setTimeout(() => {
+					link.style.transform = '';
+				}, 150);
+				
+				// В реальном приложении здесь был бы переход на страницу
+				console.log('Переход на:', link.getAttribute('href'));
+			});
+		});
+	});
+</script>

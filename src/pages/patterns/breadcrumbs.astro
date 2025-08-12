@@ -1,0 +1,415 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+
+<Layout>
+	<main class="container">
+
+		<header class="pattern-header">
+			<h1>Хлебные крошки</h1>
+			<p class="pattern-description">
+				Навигационная цепочка, показывающая путь к текущей странице в иерархии сайта
+			</p>
+		</header>
+
+		<section class="pattern-content">
+			<div class="content-grid">
+				<div class="content-main">
+					<h2>Описание паттерна</h2>
+					<p>
+						Хлебные крошки (Breadcrumbs) — это навигационный элемент, который показывает пользователю 
+						его текущее местоположение на сайте и позволяет легко вернуться к предыдущим уровням 
+						иерархии. Название происходит от сказки "Гензель и Гретель", где герои оставляли 
+						хлебные крошки, чтобы найти обратный путь.
+					</p>
+
+					<h3>Когда использовать</h3>
+					<ul>
+						<li>Сайты с глубокой иерархией страниц</li>
+						<li>Интернет-магазины с категориями товаров</li>
+						<li>Блоги с рубриками и подрубриками</li>
+						<li>Документация и справочники</li>
+						<li>Файловые менеджеры и системы управления контентом</li>
+					</ul>
+
+					<h3>Типы хлебных крошек</h3>
+					<div class="breadcrumb-types">
+						<div class="type-item">
+							<h4>Иерархические</h4>
+							<p>Показывают структуру сайта: Главная → Категория → Подкатегория → Страница</p>
+							<Breadcrumbs 
+								items={[
+									{ name: 'Главная', url: '/' },
+									{ name: 'Электроника', url: '/electronics' },
+									{ name: 'Смартфоны', url: '/electronics/smartphones' },
+									{ name: 'iPhone 15', url: '/electronics/smartphones/iphone-15' }
+								]} 
+							/>
+						</div>
+
+						<div class="type-item">
+							<h4>История навигации</h4>
+							<p>Показывают путь, по которому пользователь пришел на страницу</p>
+							<Breadcrumbs 
+								items={[
+									{ name: 'Поиск', url: '/search' },
+									{ name: 'Результаты', url: '/search?q=phone' },
+									{ name: 'Детали товара', url: '/product/123' }
+								]} 
+							/>
+						</div>
+
+						<div class="type-item">
+							<h4>Атрибутивные</h4>
+							<p>Показывают выбранные фильтры и атрибуты</p>
+							<Breadcrumbs 
+								items={[
+									{ name: 'Все товары', url: '/products' },
+									{ name: 'Цена: до 50000₽', url: '/products?price=50000' },
+									{ name: 'Бренд: Apple', url: '/products?price=50000&brand=apple' }
+								]} 
+							/>
+						</div>
+					</div>
+
+					<h3>Принципы хороших хлебных крошек</h3>
+					<ul>
+						<li><strong>Понятность:</strong> Каждый элемент должен быть понятным и информативным</li>
+						<li><strong>Краткость:</strong> Избегайте слишком длинных названий</li>
+						<li><strong>Консистентность:</strong> Используйте единый стиль по всему сайту</li>
+						<li><strong>Доступность:</strong> Обеспечьте поддержку скринридеров и клавиатурной навигации</li>
+					</ul>
+
+					<h2>Демонстрация</h2>
+					<div class="demo-section">
+						<h3>Интерактивные примеры</h3>
+						
+						<div class="demo-examples">
+							<div class="demo-example">
+								<h4>Электронный магазин</h4>
+								<Breadcrumbs 
+									items={[
+										{ name: '🏠 Главная', url: '/' },
+										{ name: '📱 Электроника', url: '/electronics' },
+										{ name: '📞 Смартфоны', url: '/electronics/smartphones' },
+										{ name: '🍎 Apple', url: '/electronics/smartphones/apple' },
+										{ name: '📱 iPhone 15 Pro', url: '/electronics/smartphones/apple/iphone-15-pro' }
+									]} 
+								/>
+							</div>
+
+							<div class="demo-example">
+								<h4>Блог</h4>
+								<Breadcrumbs 
+									items={[
+										{ name: '🏠 Главная', url: '/' },
+										{ name: '📝 Блог', url: '/blog' },
+										{ name: '💻 Технологии', url: '/blog/tech' },
+										{ name: '🤖 ИИ', url: '/blog/tech/ai' },
+										{ name: '🧠 Машинное обучение', url: '/blog/tech/ai/machine-learning' }
+									]} 
+								/>
+							</div>
+
+							<div class="demo-example">
+								<h4>Документация</h4>
+								<Breadcrumbs 
+									items={[
+										{ name: '📚 Документация', url: '/docs' },
+										{ name: '⚙️ API', url: '/docs/api' },
+										{ name: '🔐 Аутентификация', url: '/docs/api/auth' },
+										{ name: '🔑 JWT токены', url: '/docs/api/auth/jwt' }
+									]} 
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<aside class="content-sidebar">
+					<div class="sidebar-card">
+						<h3>Варианты стилизации</h3>
+						<div class="style-variants">
+							<div class="variant">
+								<h4>С иконками</h4>
+								<Breadcrumbs 
+									items={[
+										{ name: '🏠 Главная', url: '/' },
+										{ name: '📁 Папка', url: '/folder' },
+										{ name: '📄 Файл', url: '/folder/file' }
+									]} 
+								/>
+							</div>
+							<div class="variant">
+								<h4>Минималистичные</h4>
+								<Breadcrumbs 
+									items={[
+										{ name: 'Главная', url: '/' },
+										{ name: 'Раздел', url: '/section' },
+										{ name: 'Страница', url: '/section/page' }
+									]} 
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div class="sidebar-card">
+						<h3>Код компонента</h3>
+						<pre class="code-block"><code>// Использование
+&lt;Breadcrumbs 
+  items={[
+    { name: 'Главная', url: '/' },
+    { name: 'Категория', url: '/category' },
+    { name: 'Страница', url: '/category/page' }
+  ]} 
+/&gt;
+
+// Параметры
+- items: массив объектов с name и url
+- separator: разделитель (по умолчанию '/')</code></pre>
+					</div>
+
+					<div class="sidebar-card">
+						<h3>Лучшие практики</h3>
+						<ul class="best-practices">
+							<li>Размещайте в верхней части страницы</li>
+							<li>Используйте четкие и понятные названия</li>
+							<li>Обеспечьте контрастность текста</li>
+							<li>Добавьте hover-эффекты</li>
+							<li>Сделайте последний элемент неактивным</li>
+						</ul>
+					</div>
+				</aside>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		line-height: 1.6;
+		color: #333;
+	}
+
+	.pattern-header {
+		text-align: center;
+		padding: 40px 0;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		margin: -20px -20px 40px -20px;
+		border-radius: 0 0 20px 20px;
+	}
+
+	.pattern-header h1 {
+		font-size: 2.5rem;
+		margin: 0 0 15px 0;
+		font-weight: 700;
+	}
+
+	.pattern-description {
+		font-size: 1.1rem;
+		opacity: 0.9;
+		margin: 0;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.pattern-content {
+		margin-bottom: 60px;
+	}
+
+	.content-grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: 40px;
+	}
+
+	.content-main h2 {
+		font-size: 1.8rem;
+		margin: 30px 0 20px 0;
+		color: #2c3e50;
+	}
+
+	.content-main h3 {
+		font-size: 1.3rem;
+		margin: 25px 0 15px 0;
+		color: #34495e;
+	}
+
+	.content-main p {
+		margin-bottom: 15px;
+		color: #555;
+	}
+
+	.content-main ul {
+		margin-bottom: 20px;
+		padding-left: 20px;
+	}
+
+	.content-main li {
+		margin-bottom: 8px;
+		color: #555;
+	}
+
+	.breadcrumb-types {
+		display: grid;
+		gap: 25px;
+		margin: 25px 0;
+	}
+
+	.type-item {
+		background: #f8f9fa;
+		padding: 25px;
+		border-radius: 12px;
+		border: 1px solid #e1e5e9;
+	}
+
+	.type-item h4 {
+		margin: 0 0 10px 0;
+		color: #2c3e50;
+		font-size: 1.1rem;
+	}
+
+	.type-item p {
+		margin: 0 0 15px 0;
+		color: #666;
+		font-size: 0.95rem;
+	}
+
+	.demo-section {
+		background: #f8f9fa;
+		padding: 30px;
+		border-radius: 12px;
+		margin: 30px 0;
+	}
+
+	.demo-section h3 {
+		margin-top: 0;
+		color: #2c3e50;
+	}
+
+	.demo-examples {
+		display: grid;
+		gap: 25px;
+		margin-top: 20px;
+	}
+
+	.demo-example {
+		background: white;
+		padding: 20px;
+		border-radius: 8px;
+		border: 1px solid #e1e5e9;
+	}
+
+	.demo-example h4 {
+		margin: 0 0 15px 0;
+		color: #2c3e50;
+		font-size: 1rem;
+	}
+
+	.content-sidebar {
+		position: sticky;
+		top: 20px;
+		height: fit-content;
+	}
+
+	.sidebar-card {
+		background: white;
+		border-radius: 12px;
+		padding: 25px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		margin-bottom: 25px;
+	}
+
+	.sidebar-card h3 {
+		margin: 0 0 20px 0;
+		color: #2c3e50;
+		font-size: 1.2rem;
+	}
+
+	.style-variants {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.variant {
+		padding: 15px;
+		background: #f8f9fa;
+		border-radius: 8px;
+	}
+
+	.variant h4 {
+		margin: 0 0 10px 0;
+		font-size: 0.9rem;
+		color: #6c757d;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.code-block {
+		background: #2d3748;
+		color: #e2e8f0;
+		padding: 20px;
+		border-radius: 8px;
+		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		overflow-x: auto;
+	}
+
+	.code-block code {
+		background: none;
+		padding: 0;
+	}
+
+	.best-practices {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.best-practices li {
+		padding: 8px 0;
+		border-bottom: 1px solid #e1e5e9;
+		color: #555;
+		font-size: 0.95rem;
+	}
+
+	.best-practices li:last-child {
+		border-bottom: none;
+	}
+
+	/* Адаптивность */
+	@media (max-width: 768px) {
+		.content-grid {
+			grid-template-columns: 1fr;
+			gap: 30px;
+		}
+
+		.content-sidebar {
+			position: static;
+		}
+
+		.pattern-header h1 {
+			font-size: 2rem;
+		}
+
+		.demo-section {
+			padding: 20px;
+		}
+
+		.breadcrumb-types {
+			gap: 20px;
+		}
+
+		.type-item {
+			padding: 20px;
+		}
+	}
+</style>
