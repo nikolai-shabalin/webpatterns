@@ -60,38 +60,38 @@ import './centering-page.css';
 
       Логическое свойство, задаёт оба боковых внешних отступа: начало и конец строки (вместо `margin-left/right`). Оно учитывает направление письма (LTR/RTL), поэтому правило универсально.
 
-    <img src="/public/centering-page/margin-inline.png" width="1200" height="370" alt="margin-inline с указанием направления письма" />
+    <img src="/centering-page/margin-inline.png" width="1200" height="370" alt="margin-inline с указанием направления письма" />
 
   2. `max()`
 
       Функция берёт наибольшее из двух значений. Нам нужно «не меньше, чем 20 px», но если свободного пространства больше — использовать большую величину для центрирования.
 
-    <img src="/public/centering-page/margin-inline-what-size.png" width="1200" height="370" alt="Какой размер у отступа слева и справа?" />
+    <img src="/centering-page/margin-inline-what-size.png" width="1200" height="370" alt="Какой размер у отступа слева и справа?" />
 
       - **A** = `20px` — нижняя граница боковых полей на узких экранах.
-      <img style="display: block; margin-inline: auto" src="/public/centering-page/margin-inline-mobile-size.png" width="480" height="250" alt="На мобильном размер будет минимальным 20px" />
+      <img style="display: block; margin-inline: auto" src="/centering-page/margin-inline-mobile-size.png" width="480" height="250" alt="На мобильном размер будет минимальным 20px" />
       - **B** = `(100% - 960px) / 2` — половина «лишней» ширины контейнера относительно `960px`.
 
       <figure>
-        <img src="/public/centering-page/margin-inline-full-size.png" width="1200" height="370" alt="Весь размер окна 1200px" />
+        <img src="/centering-page/margin-inline-full-size.png" width="1200" height="370" alt="Весь размер окна 1200px" />
         <figcaption>
           Для удобного расчёта представим, что размер всего сайта `1200px` (100%).
         </figcaption>
       </figure>
       <figure>
-        <img src="/public/centering-page/margin-inline-more-size.png" width="1200" height="370" alt="Размер оставшейся части 100% - 960 = 240px" />
+        <img src="/centering-page/margin-inline-more-size.png" width="1200" height="370" alt="Размер оставшейся части 100% - 960 = 240px" />
         <figcaption>
           Оставшаяся часть сайта равна: `100% - 960px = 240px`. Вместо 1200px используем `100%`, так как это ширина всего сайта на любом размере экрана.
         </figcaption>
       </figure>
       <figure>
-        <img src="/public/centering-page/margin-inline-half-size.png" width="1200" height="370" alt="Половина оставшейся части 240px / 2 = 120px" />
+        <img src="/centering-page/margin-inline-half-size.png" width="1200" height="370" alt="Половина оставшейся части 240px / 2 = 120px" />
         <figcaption>
           Половина оставшейся части сайта равна: `240px / 2 = 120px`. Это и будет отступ слева и справа.
         </figcaption>
       </figure>
         <figure>
-        <img src="/public/centering-page/margin-inline-final-size.png" width="1200" height="370" alt="half" />
+        <img src="/centering-page/margin-inline-final-size.png" width="1200" height="370" alt="half" />
         <figcaption>
           Итоговое значение отступа слева и справа: `max(20px, 120px) = 120px`.
         </figcaption>
