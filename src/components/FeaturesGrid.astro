@@ -1,0 +1,76 @@
+---
+// Статичный компонент без пропсов
+---
+
+<div class="features-grid">
+  <div class="feature">
+    <div class="feature-icon">🔧</div>
+    <h3>Готовые решения</h3>
+    <p>
+      Проверенные временем подходы к созданию пользовательских интерфейсов
+    </p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">⚡</div>
+    <h3>Быстрая разработка</h3>
+    <p>Ускоряем процесс создания интуитивно понятных веб-приложений</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">🎯</div>
+    <h3>Консистентность</h3>
+    <p>Обеспечиваем единообразие интерфейса во всем приложении</p>
+  </div>
+</div>
+
+<style>
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
+  }
+
+  .feature {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .feature:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .feature h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  .feature p {
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feature {
+      padding: 30px 20px;
+    }
+  }
+</style>

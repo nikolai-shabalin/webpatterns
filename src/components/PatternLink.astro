@@ -1,0 +1,48 @@
+---
+interface Props {
+  href: string;
+  text?: string;
+}
+
+const { href, text = "Подробнее" } = Astro.props;
+---
+
+<a href={href} class="pattern-link">
+  {text}
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+  >
+    <path d="M5 12h14M12 5l7 7-7 7"></path>
+  </svg>
+</a>
+
+<style>
+  .pattern-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 8px 0;
+  }
+
+  .pattern-link:hover {
+    color: #764ba2;
+    gap: 12px;
+  }
+
+  .pattern-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .pattern-link:hover svg {
+    transform: translateX(4px);
+  }
+</style>

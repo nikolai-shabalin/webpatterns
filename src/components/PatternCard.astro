@@ -1,0 +1,117 @@
+---
+import PatternLink from "./PatternLink.astro";
+
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  href: string;
+}
+
+const { icon, title, description, imageSrc, imageAlt, href } = Astro.props;
+---
+
+<div class="pattern-card">
+  <div class="card-header">
+    <div class="pattern-icon">{icon}</div>
+    <h3>{title}</h3>
+  </div>
+  <p>{description}</p>
+  <div class="pattern-demo">
+    <img src={imageSrc} alt={imageAlt} class="demo-image" />
+  </div>
+  <PatternLink href={href} />
+</div>
+
+<style>
+  .pattern-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pattern-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .pattern-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .pattern-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .pattern-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 10px;
+  }
+
+  .pattern-card h3 {
+    font-size: 1.4rem;
+    margin: 0;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  .pattern-card p {
+    color: #666;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .pattern-demo {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .demo-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .pattern-card {
+      padding: 24px;
+    }
+  }
+</style>

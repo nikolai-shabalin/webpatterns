@@ -1,0 +1,60 @@
+---
+// Статичный компонент без пропсов
+---
+
+<header class="hero">
+  <div class="hero-badge">🚀 Веб-паттерны</div>
+  <h1>Создавайте отличные интерфейсы</h1>
+  <p class="subtitle">
+    Коллекция проверенных решений для современной веб-разработки
+  </p>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 80px 0 100px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    color: white;
+    margin: -20px -20px 60px -20px;
+    border-radius: 0 0 30px 30px;
+    overflow: hidden;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: 0 0 20px 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    opacity: 0.9;
+    margin: 0 0 40px 0;
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 60px 0 80px 0;
+    }
+  }
+</style>
