@@ -3,11 +3,18 @@ import Description from '../../components/Patterns/Description.astro';
 import './_centering-page.css';
 
 <Layout>
-  <h1>Центрирование страницы</h1>
+  # Центрирование страницы
 
   <Description>
     Этот паттерн позволяет центрировать контент на странице с помощью CSS, используя функцию `max()` и `margin-inline` для создания адаптивных отступов.
   </Description>
+
+  ## Код паттерна
+  ```css
+    .container {
+      margin-inline: max(20px, (100% - 960px) / 2);
+    }
+  ```
 
   ## Постановка задачи
   Нужно центрировать контентный блок так, чтобы:
