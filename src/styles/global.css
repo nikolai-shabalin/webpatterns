@@ -45,6 +45,11 @@ pre {
   padding: 16px;
 }
 
+pre > code {
+  display: inline-block;
+  min-width: max-content;
+}
+
 
 figure {
   margin: 0;

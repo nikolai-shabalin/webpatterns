@@ -85,7 +85,6 @@ h1, h2 {
 /* Фигуры с иллюстрациями */
 figure {
   border-radius: 12px;
-  border: 1px solid transparent;
   border-image: linear-gradient(90deg, var(--gp-accent-1), var(--gp-accent-2)) 1;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)) padding-box,
