@@ -112,7 +112,6 @@ code {
   padding: 0.1rem 0.35rem;
 }
 
-/* Ссылки с градиентным подчёркиванием */
 a {
   color: var(--gp-primary);
   text-decoration: none;
@@ -128,7 +127,6 @@ a:hover {
   background-size: 100% 2px;
 }
 
-/* Не стилизуем code, находящийся внутри pre (подсвечиваем только инлайн-variant) */
 pre code {
   background: none;
   border: 0;

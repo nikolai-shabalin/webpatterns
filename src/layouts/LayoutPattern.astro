@@ -1,0 +1,42 @@
+---
+import Head from '../components/Head.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="ru">
+  <Head />
+	<body>
+    <main class="container">
+		  <a class="back-link" href="/">назад</a>
+		  <slot />
+    </main>
+	</body>
+</html>
+
+<style>
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-block: 20px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  background-color: transparent;
+  transition: color 0.2s ease;
+}
+
+.back-link::before {
+  content: '←';
+  line-height: 1;
+}
+
+.back-link:hover {
+  background-image: none;
+}
+
+.back-link:active {
+  transform: translateY(1px);
+}
+</style>
