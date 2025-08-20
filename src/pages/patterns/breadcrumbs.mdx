@@ -11,6 +11,63 @@ import './_breadcrumbs.css';
   </Description>
 
   ## Код паттерна
+  ```html
+    <nav class="breadcrumb" aria-label="Хлебные крошки">
+    <ol class="breadcrumb__list">
+      <li class="breadcrumb__item">
+        <a href="../../../.." class="breadcrumb__link">Главная</a>
+      </li>
+      <li class="breadcrumb__item">
+        <a href="../../../" class="breadcrumb__link">Веб-паттерны</a>
+      </li>
+      <li class="breadcrumb__item">
+        <a href="../../" class="breadcrumb__link">Хлебные крошки</a>
+      </li>
+      <li class="breadcrumb__item">
+        <a aria-current="page" class="breadcrumb__link">Пример использования хлебных крошек</a>
+      </li>
+    </ol>
+  </nav>
+  ```
+
+  ```css
+  .breadcrumb {
+    --indent: 8px;
+    font-size: 20px;
+    overflow-x: auto;
+  }
+
+  .breadcrumb__list {
+    /* убираем дефолтную стилизацию списков */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex; /* в строку */
+    align-items: center; /* по вертикали по центру */
+    gap: var(--indent); /* расстояние между элементами */
+    width: max-content;
+  }
+
+  /* типовой разделитель */
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--indent);
+    color: #888;
+  }
+
+  .breadcrumb__link:not([aria-current="page"]) {
+    color: #0077cc;
+    text-decoration: none;
+  }
+
+  .breadcrumb__link:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb__link[aria-current="page"]:hover {
+    text-decoration: none; /* убираем underline при ховере */
+  }
+  ```
 
   ## Правила по использованию
   Хлебные крошки:
