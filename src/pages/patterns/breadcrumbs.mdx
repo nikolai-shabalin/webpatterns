@@ -1,0 +1,99 @@
+import Layout from '../../layouts/LayoutPattern.astro';
+import Description from '../../components/Patterns/Description.astro';
+import DiscussOnGitHub from '../../components/DiscussOnGitHub.astro';
+import './_breadcrumbs.css';
+
+<Layout>
+  # Хлебные крошки
+
+  <Description>
+    Этот паттерн позволяет создавать хлебные крошки для сайта.
+  </Description>
+
+  ## Код паттерна
+  ```html
+  <nav class="breadcrumb" aria-label="Хлебные крошки">
+    <ol class="breadcrumb__list">
+      <li class="breadcrumb__item">
+        <a href="../../../.." class="breadcrumb__link">Главная</a>
+      </li>
+      <li class="breadcrumb__item">
+        <a href="../../../" class="breadcrumb__link">Веб-паттерны</a>
+      </li>
+      <li class="breadcrumb__item">
+        <a href="../../" class="breadcrumb__link">Хлебные крошки</a>
+      </li>
+      <li class="breadcrumb__item">
+        <a aria-current="page" class="breadcrumb__link">Пример использования хлебных крошек</a>
+      </li>
+    </ol>
+  </nav>
+  ```
+
+  ```css
+  .breadcrumb {
+    --indent: 8px;
+    font-size: 20px;
+    overflow-x: auto;
+  }
+
+  .breadcrumb__list {
+    /* убираем дефолтную стилизацию списков */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex; /* в строку */
+    align-items: center; /* по вертикали по центру */
+    gap: var(--indent); /* расстояние между элементами */
+    width: max-content;
+  }
+
+  /* типовой разделитель */
+  .breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--indent);
+    color: #888;
+  }
+
+  .breadcrumb__link:not([aria-current="page"]) {
+    color: #0077cc;
+    text-decoration: none;
+  }
+
+  .breadcrumb__link:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb__link[aria-current="page"]:hover {
+    text-decoration: none; /* убираем underline при ховере */
+  }
+  ```
+
+  ## Правила по использованию
+  Хлебные крошки:
+  - не должны заменять глобальную навигацию или локальную навигацию внутри раздела. Это всегда дополнительная навигация.
+  - желательно находятся рядом с основной навигацией.
+  - должны отображать текущее местоположение в иерархической структуре сайта, а не историю сеансов.
+  - олжны включать только страницы сайта, а не логические категории.
+  - не нужны (или не полезна) для сайтов с плоской иерархией, имеющей всего 1 или 2 уровня глубины, или для сайтов с линейной структурой.
+  - должны начинаться со ссылки на домашнюю страницу.
+  - не должны разбиваться на несколько строк.
+  ## Постановка задачи
+
+
+
+  ### Пошаговый разбор выражения
+
+
+  ## Примеры использования
+
+
+  ## Поддержка браузеров
+  Поддержка браузеров:
+  - Chrome
+  - Firefox
+  - Safari
+
+
+  <DiscussOnGitHub href="https://github.com/nikolai-shabalin/webpatterns/discussions/3" />
+</Layout>

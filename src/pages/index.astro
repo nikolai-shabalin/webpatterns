@@ -15,13 +15,23 @@ import PatternsList from "../components/PatternsList.astro";
     <FeaturesGrid />
   </section>
 
-  <PatternCard
-    icon="📄"
-    title="Центрирование страницы"
-    description="Современный вариант центрирования контента на странице."
-    imageSrc="/centering-page/margin-inline-final-size.png"
-    imageAlt="Демонстрация центрирования контента на странице"
-    href="/patterns/centering-page"
-  />
+  <PatternsList>
+    <PatternCard
+      icon="📄"
+      title="Центрирование страницы"
+      description="Современный вариант центрирования контента на странице."
+      imageSrc="/centering-page/margin-inline-final-size.png"
+      imageAlt="Демонстрация центрирования контента на странице"
+      href="/patterns/centering-page"
+    />
+
+    <PatternCard
+      icon="🍞"
+      title="Хлебные крошки"
+      description="Современный вариант центрирования контента на странице."
+      imageSrc="/breadcrumbs/breadcrumbs.png"
+      imageAlt="Демонстрация центрирования контента на странице"
+      href="/patterns/breadcrumbs"
+    />
   </PatternsList>
 </Layout>
