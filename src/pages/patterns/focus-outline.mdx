@@ -1,0 +1,116 @@
+import Layout from '../../layouts/LayoutPattern.astro';
+import Description from '../../components/Patterns/Description.astro';
+import DiscussOnGitHub from '../../components/DiscussOnGitHub.astro';
+import './_focus-outline.css';
+
+<Layout>
+  # Универсальный фокус для интерактивных элементов
+
+  <Description>
+    Этот паттерн помогает создать функциональное состояние фокуса для всех интерактивных элементов.
+    Он делает интерфейс доступнее и понятнее для пользователей, которые работают с сайтом с клавиатуры или с помощью вспомогательных технологий.
+  </Description>
+
+  ## Код паттерна
+  ```css
+    *:focus-visible {
+      outline: 3px solid light-dark(#000000, #ffffff);
+      outline-offset: 0.25rem;
+      border-radius: 0.13rem;
+    }
+
+    :root {
+      color-scheme: light dark;
+    }
+  ```
+
+  <img src="/focus-outline/focus-outline.png" width="1200" height="250" alt="Универсальный фокус для интерактивных элементов" />
+
+  ## Постановка задачи
+
+  Нужно обеспечить:
+  * доступный фокус для всех интерактивных элементов;
+  * универсальную обводку, которая одинаково хорошо видна в светлой и тёмной теме;
+  * простое решение «на все случаи», которое можно применить глобально.
+
+  ## Антипаттерн
+  Обычно разработчики делали так:
+
+  ```css
+  *:focus {
+    outline: none; /* убираем фокус */
+  }
+  ```
+
+  или использовали только чёрный/синий цвет по умолчанию. Это ухудшает доступность особенно, когда в проекте есть переключение между тёмной и светлой темами.
+
+  > Никогда не отключайте `outline` для интерактивных элементов. Это нарушает доступность. Либо подготовьте достойную кастомную обводку.
+
+  ## Современный подход
+
+  Мы используем селектор `:focus-visible` и современный цветовой синтаксис `light-dark()`:
+
+  ```css
+  *:focus-visible {
+    outline: 3px solid light-dark(#000000, #ffffff);
+    outline-offset: 0.25rem;
+    border-radius: 0.13rem;
+  }
+
+  :root {
+    color-scheme: light dark;
+  }
+  ```
+
+  ### Почему так лучше?
+
+  1. **`:focus-visible`**
+  Срабатывает только при управлении с клавиатуры и вспомогательными технологиями. При клике мышью лишних обводок нет.
+  2. **`light-dark()`**
+  Позволяет автоматически менять цвет в зависимости от темы: чёрный(`#000000`) в светлой, белый(`#ffffff`) в тёмной.
+  3. **`outline-offset` и `border-radius`**
+  Делаем обводку чуть смещённой и закруглённой для лучшей визуальной читаемости.
+  4. **`color-scheme: light dark`**
+  Сообщаем браузеру, что сайт поддерживает обе темы.
+
+  ## Примеры использования
+
+  ### Пример №1: Базовый
+
+  ```html
+  <button>Нажми меня</button>
+  <a href="#">Ссылка</a>
+  <input type="text" placeholder="Фокус сюда" />
+  ```
+
+  <figure>
+    <button>Нажми меня</button>
+    <br />
+    <a href="#">Ссылка</a>
+    <br />
+    <input type="text" placeholder="Фокус сюда" />
+    <figcaption>
+      На клавиатуре все элементы получат одинаковый аккуратный фокус. Нажимай Tab, чтобы посмотреть на фокус.
+    </figcaption>
+  </figure>
+
+  ### Пример №2: С кастомным цветом
+
+  Можно использовать `currentcolor`, если хочется, чтобы обводка наследовала цвет текста элемента:
+
+  ```css
+  *:focus-visible {
+    outline: 3px solid currentcolor;
+    outline-offset: 0.25rem;
+    border-radius: 0.13rem;
+  }
+  ```
+
+  ## Поддержка браузерами
+  * Chrome 123+ из-за `light-dark()`
+  * Firefox 120+ из-за `light-dark()`
+  * Safari 17.4+ из-за `light-dark()`
+
+
+  <DiscussOnGitHub href="https://github.com/nikolai-shabalin/webpatterns/discussions/6" />
+</Layout>
