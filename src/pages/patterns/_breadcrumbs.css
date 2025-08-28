@@ -50,23 +50,22 @@
 
 /* Градиентные паттерны и уникальная стилизация страницы */
 :root {
-  --gp-primary: #6a11cb;
-  --gp-secondary: #2575fc;
-  --gp-accent-1: #ff6a88;
-  --gp-accent-2: #ffc46b;
-  --gp-surface: #f8f9fa;
+  --page-fg: #0e1218;
+  --page-bg: #f7f9fc;
+  --page-muted: #5b6470;
+  --brand-1: #0ea5e9;
+  --brand-2: #7c3aed;
+  --surface: #ffffff;
 }
 
 body {
-  background-color: #f7f9fc;
+  background-color: var(--page-bg);
   background-image:
-    radial-gradient(1200px 600px at -10% -10%, rgba(120, 89, 255, 0.08), transparent 60%),
-    radial-gradient(900px 500px at 110% 0%, rgba(255, 121, 198, 0.10), transparent 60%),
-    radial-gradient(800px 500px at 50% 120%, rgba(37, 117, 252, 0.08), transparent 60%),
-    linear-gradient(180deg, rgba(14, 18, 24, 0) 0%, rgba(14, 18, 24, 0.04) 100%),
-    repeating-linear-gradient(0deg, rgba(60, 64, 67, 0.05) 0 1px, transparent 1px 48px),
-    repeating-linear-gradient(90deg, rgba(60, 64, 67, 0.05) 0 1px, transparent 1px 48px);
-  background-attachment: fixed, fixed, fixed, fixed, fixed, fixed;
+    radial-gradient(800px 400px at -10% -20%, rgba(14, 165, 233, 0.08), transparent 60%),
+    radial-gradient(700px 380px at 110% -10%, rgba(124, 58, 237, 0.08), transparent 60%),
+    linear-gradient(180deg, rgba(14, 18, 24, 0) 0%, rgba(14, 18, 24, 0.04) 100%);
+  background-attachment: fixed, fixed, fixed;
+  color: var(--page-fg);
 }
 
 main.container {
@@ -74,89 +73,44 @@ main.container {
   z-index: 0;
 }
 
-/* Градиентный текст заголовков */
+/* Заголовки: аккуратный градиентный текст */
 h1, h2 {
-  background-image: linear-gradient(90deg, var(--gp-primary), var(--gp-secondary));
+  background-image: linear-gradient(90deg, var(--brand-1), var(--brand-2));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Карточка-пример с градиентной окантовкой и светящимся фоном */
-.block {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid transparent;
-  border-image: linear-gradient(135deg, var(--gp-primary), var(--gp-secondary)) 1;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)) padding-box,
-    linear-gradient(135deg, rgba(106, 17, 203, 0.12), rgba(37, 117, 252, 0.12)) border-box;
-  backdrop-filter: blur(2px);
-  box-shadow:
-    0 10px 30px rgba(37, 117, 252, 0.12),
-    0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.block::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  background:
-    radial-gradient(220px 220px at 20% -10%, rgba(106, 17, 203, 0.18), transparent 60%),
-    radial-gradient(260px 260px at 110% 20%, rgba(37, 117, 252, 0.18), transparent 60%),
-    conic-gradient(from 0.25turn at 50% 50%, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.06) 25%, rgba(255, 255, 255, 0.0) 50%);
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  animation: gp-float 14s ease-in-out infinite alternate;
-}
-
-@keyframes gp-float {
-  0% { transform: translate3d(0, -2%, 0); }
-  100% { transform: translate3d(0, 2%, 0); }
-}
-
-/* Фигуры с иллюстрациями */
+/* Фигуры и иллюстрации: лёгкая карточка */
 figure {
-  border-radius: 12px;
-  border-image: linear-gradient(90deg, var(--gp-accent-1), var(--gp-accent-2)) 1;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)) padding-box,
-    radial-gradient(140% 80% at 10% 0%, rgba(255, 106, 136, 0.10), transparent 60%),
-    radial-gradient(120% 80% at 100% 20%, rgba(255, 196, 107, 0.10), transparent 60%) border-box;
+  margin: 1.25rem 0;
   padding: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid rgba(14, 18, 24, 0.06);
+  box-shadow: 0 8px 24px rgba(14, 18, 24, 0.06);
 }
 
 figure > figcaption {
-  color: #5b6470;
+  margin-top: 8px;
+  color: var(--page-muted);
 }
 
 img {
+  display: block;
+  max-width: 100%;
+  height: auto;
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(37, 117, 252, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 18px rgba(14, 18, 24, 0.08);
 }
 
-
+/* Инлайн-код и преформатированный код */
 code {
-  background:
-    linear-gradient(90deg, rgba(106, 17, 203, 0.12), rgba(37, 117, 252, 0.12));
-  border: 1px solid rgba(106, 17, 203, 0.20);
+  background: rgba(14, 165, 233, 0.08);
+  color: #0b3b4f;
+  border: 1px solid rgba(14, 165, 233, 0.24);
   border-radius: 6px;
   padding: 0.1rem 0.35rem;
-}
-
-a {
-  color: var(--gp-primary);
-  text-decoration: none;
-  background-size: 0 2px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  transition: background-size 160ms ease-out, color 160ms ease-out;
-}
-
-a:hover {
-  color: var(--gp-secondary);
-  background-size: 100% 2px;
 }
 
 pre code {
@@ -165,4 +119,14 @@ pre code {
   border-radius: 0;
   padding: 0;
   box-shadow: none;
+}
+
+/* Ссылки с мягким подчёркиванием */
+a {
+  color: var(--brand-1);
+  text-decoration: none;
+  background-size: 0 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 160ms ease-out, color 160ms ease-out;
 }
