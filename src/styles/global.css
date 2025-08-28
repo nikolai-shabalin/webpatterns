@@ -5,11 +5,14 @@
 }
 
 *:focus-visible {
-  outline: 3px solid #000000;
+  outline: 3px solid light-dark(#000000, #ffffff);
   outline-offset: 0.25rem;
   border-radius: 0.13rem;
 }
 
+:root {
+  color-scheme: light dark;
+}
 
 html {
   scroll-behavior: smooth;
