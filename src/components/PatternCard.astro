@@ -8,9 +8,11 @@ interface Props {
   imageSrc: string;
   imageAlt: string;
   href: string;
+  imageWidth: string;
+  imageHeight: string;
 }
 
-const { icon, title, description, imageSrc, imageAlt, href } = Astro.props;
+const { icon, title, description, imageSrc, imageAlt, href, imageWidth, imageHeight } = Astro.props;
 ---
 
 <div class="pattern-card">
@@ -20,7 +22,7 @@ const { icon, title, description, imageSrc, imageAlt, href } = Astro.props;
   </div>
   <p>{description}</p>
   <div class="pattern-demo">
-    <img src={imageSrc} alt={imageAlt} class="demo-image" />
+    <img src={imageSrc} alt={imageAlt} class="demo-image" width={imageWidth} height={imageHeight} />
   </div>
   <PatternLink href={href} />
 </div>
