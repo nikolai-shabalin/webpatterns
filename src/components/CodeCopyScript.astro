@@ -1,0 +1,89 @@
+<script>
+  const copyIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+  `;
+
+  const checkIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"></path>
+    </svg>
+  `;
+
+  const enhanceCodeBlocks = () => {
+    const codeBlocks = document.querySelectorAll('pre > code');
+
+    codeBlocks.forEach((codeElement) => {
+      const preElement = codeElement.parentElement;
+      if (!preElement || preElement.dataset.copyReady === 'true') {
+        return;
+      }
+
+      preElement.dataset.copyReady = 'true';
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      preElement.parentNode?.insertBefore(wrapper, preElement);
+      wrapper.appendChild(preElement);
+
+      const copyButton = document.createElement('button');
+      copyButton.type = 'button';
+      copyButton.className = 'code-copy-btn';
+      copyButton.innerHTML = copyIcon;
+      copyButton.setAttribute('aria-label', 'Скопировать код');
+      preElement.appendChild(copyButton);
+
+      copyButton.addEventListener('click', async () => {
+        const textToCopy = codeElement.textContent ?? '';
+        let copied = false;
+
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(textToCopy);
+            copied = true;
+          }
+        } catch {
+          copied = false;
+        }
+
+        if (!copied) {
+          const textarea = document.createElement('textarea');
+          textarea.value = textToCopy;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+
+          try {
+            copied = document.execCommand('copy');
+          } catch {
+            copied = false;
+          }
+
+          document.body.removeChild(textarea);
+        }
+
+        if (!copied) {
+          return;
+        }
+
+        copyButton.innerHTML = checkIcon;
+        copyButton.setAttribute('aria-label', 'Скопировано');
+
+        window.setTimeout(() => {
+          copyButton.innerHTML = copyIcon;
+          copyButton.setAttribute('aria-label', 'Скопировать код');
+        }, 1400);
+      });
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enhanceCodeBlocks);
+  } else {
+    enhanceCodeBlocks();
+  }
+</script>

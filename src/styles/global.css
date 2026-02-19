@@ -169,12 +169,53 @@ a:hover {
 }
 
 pre {
+  position: relative;
   border-radius: 14px;
   padding: 18px;
   background: rgba(96, 66, 41, 0.13);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   overflow-x: auto;
+  margin: 0;
+}
+
+.code-block {
+  position: relative;
+  margin-block: 1em;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  background: rgba(45, 35, 28, 0.78);
+  color: #fff4dc;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 120ms ease, background-color 160ms ease;
+}
+
+.code-copy-btn:hover {
+  background: rgba(45, 35, 28, 0.92);
+}
+
+.code-copy-btn:active {
+  transform: scale(0.96);
+}
+
+.code-copy-btn svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+  pointer-events: none;
 }
 
 pre > code {
@@ -445,6 +486,7 @@ figcaption p {
   font-size: 1.36rem;
   width: 44px;
   height: 44px;
+  aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
   border-radius: 12px;

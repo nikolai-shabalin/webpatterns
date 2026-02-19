@@ -1,5 +1,6 @@
 ---
 import Head from '../components/Head.astro';
+import CodeCopyScript from '../components/CodeCopyScript.astro';
 import '../styles/global.css';
 ---
 
@@ -10,5 +11,6 @@ import '../styles/global.css';
     <main class="container">
 		  <slot />
     </main>
+    <CodeCopyScript />
 	</body>
 </html>
