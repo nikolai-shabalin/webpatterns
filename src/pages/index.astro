@@ -1,24 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PatternCard from "../components/PatternCard.astro";
-import Hero from "../components/Hero.astro";
-import SectionHeader from "../components/SectionHeader.astro";
-import FeaturesGrid from "../components/FeaturesGrid.astro";
-import PatternsList from "../components/PatternsList.astro";
 ---
 
 <Layout>
-  <Hero />
-
-  <section class="description">
-    <SectionHeader />
-    <FeaturesGrid />
+  <section class="home-intro" aria-labelledby="home-intro-title">
+    <h1 id="home-intro-title">Что такое веб-паттерны</h1>
+    <p>
+      Веб-паттерны это проверенные подходы к типовым задачам интерфейса: они помогают делать решения
+      быстрее, понятнее и стабильнее от проекта к проекту.
+    </p>
   </section>
 
-  <PatternsList>
+  <section class="patterns">
+    <div class="patterns-grid">
     <PatternCard
       icon="🍞"
-      title="Хлебные крошки"
+      title="WIP: Хлебные крошки"
       description="Дополнительная навигация, которая помогает пользователям понять, где они находятся в структуре сайта."
       imageSrc="/breadcrumbs/breadcrumbs-preview.png"
       imageWidth="712px"
@@ -48,5 +46,6 @@ import PatternsList from "../components/PatternsList.astro";
       imageAlt="Демонстрация центрирования контента на странице"
       href="/patterns/centering-page"
     />
-  </PatternsList>
+    </div>
+  </section>
 </Layout>
