@@ -22,7 +22,3 @@
 - Создайте [issue](https://github.com/nikolai-shabalin/webpatterns/issues) для предложения нового паттерна
 - Присоединяйтесь к [обсуждениям](https://github.com/nikolai-shabalin/webpatterns/discussions) для обмена опытом
 - Делитесь своими решениями и лучшими практиками
-
-## Лицензия
-
-MIT License
